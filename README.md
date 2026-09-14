@@ -85,17 +85,9 @@ Project_23060486/
 │       └── scala/
 │           └── service/          # Unit tests verifying matching rules
 │               └── MarketplaceManagerSpec.scala
-├── docs/                         # Assignment documentation files
-│   ├── UML.png                   # UML Class diagram with 5+ classes
-│   ├── reflection.md             # Personal reflection report (~350-700 words)
-│   ├── ai_reflection.md          # AI integration reflection report (300-500 words)
-│   ├── dev_log.md                # Development log with 5+ dated entries spanning 5+ days
-│   ├── citations.md              # Third-party code/asset citations and licenses
-│   └── demo.mp4                  # Walkthrough video demonstrating all features (<= 5 min)
-├── ai/                           # AI usage logs and declaration sheets
-│   ├── interaction_log.md        # Template 2 - AI Interaction Log with 10+ entries
-│   └── declaration.md            # Template 3 - Signed AI declaration sheet
-└── submission_manifest.md        # Submission package manifest checklist
+└── docs/                         # Assignment documentation files
+    ├── UML.png                   # UML Class diagram with 5+ classes
+    └── citations.md              # Third-party code/asset citations and licenses
 
 ```
 
