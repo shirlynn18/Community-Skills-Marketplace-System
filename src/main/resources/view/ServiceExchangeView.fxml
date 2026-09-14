@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ServiceExchangeController"
+            style="-fx-background-color: -background; -fx-padding: 20;"
+            stylesheets="@../css/style.css">
+
+    <center>
+        <!-- Scrollable Main Content Area -->
+        <ScrollPane fitToWidth="true"
+                    fitToHeight="false"
+                    style="-fx-background-color: transparent; -fx-background: -background; -fx-padding: 0;">
+            <content>
+                <VBox spacing="15.0" style="-fx-background-color: -background; -fx-padding: 0 5 10 0;">
+                    <!-- HEADER: Title, Subtitle -->
+                    <VBox spacing="5.0">
+                        <Label text="Service Exchange &amp; Credit Management" styleClass="section-title" style="-fx-font-size: 20px; -fx-padding: 0;"/>
+                        <Label text="Manage service exchanges, credit transfers, and transaction history." style="-fx-font-size: 13px; -fx-text-fill: -ink-soft;"/>
+                    </VBox>
+
+                    <!-- Stats Header -->
+                    <HBox spacing="20.0" style="-fx-background-color: -surface-alt; -fx-padding: 8; -fx-background-radius: 4px; -fx-border-color: -line; -fx-border-radius: 4px;">
+                        <HBox spacing="5.0" alignment="CENTER_LEFT">
+                            <Label text="Pending:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblStatPending" text="0" style="-fx-text-fill: -yellow; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox spacing="5.0" alignment="CENTER_LEFT">
+                            <Label text="Accepted:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblStatAccepted" text="0" style="-fx-text-fill: -status-matched; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox spacing="5.0" alignment="CENTER_LEFT">
+                            <Label text="Completed:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblStatCompleted" text="0" style="-fx-text-fill: -status-active; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                        <HBox spacing="5.0" alignment="CENTER_LEFT">
+                            <Label text="Cancelled:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblStatCancelled" text="0" style="-fx-text-fill: -brick; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </HBox>
+
+                    <!-- ROW 1 (Full Width): Match Active Offer & Request -->
+                    <VBox spacing="10.0" style="-fx-padding: 15; -fx-background-color: -surface; -fx-background-radius: 8px; -fx-border-color: -line; -fx-border-radius: 8px;">
+                        <Label text="Match Active Offer &amp; Request" style="-fx-text-fill: -teal; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+
+                        <GridPane hgap="15.0" vgap="10.0">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="33.33" />
+                                <ColumnConstraints percentWidth="33.33" />
+                                <ColumnConstraints percentWidth="33.33" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="45.0" />
+                                <RowConstraints minHeight="35.0" />
+                            </rowConstraints>
+                            <children>
+                                <VBox spacing="3.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                    <Label text="Offer" style="-fx-text-fill: -ink-soft; -fx-font-size: 11px;"/>
+                                    <ComboBox fx:id="cmbOffers" promptText="Select Active Offer" maxWidth="Infinity" style="-fx-min-height: 35px;"/>
+                                </VBox>
+                                <VBox spacing="3.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <Label text="Request" style="-fx-text-fill: -ink-soft; -fx-font-size: 11px;"/>
+                                    <ComboBox fx:id="cmbRequests" promptText="Select Active Request" maxWidth="Infinity" style="-fx-min-height: 35px;"/>
+                                </VBox>
+                                <VBox spacing="3.0" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                                    <Label text="Exchange Date" style="-fx-text-fill: -ink-soft; -fx-font-size: 11px;"/>
+                                    <DatePicker fx:id="dpBookingDate" promptText="Select Date" maxWidth="Infinity" style="-fx-min-height: 35px;"/>
+                                </VBox>
+
+                                <HBox spacing="30.0" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <HBox spacing="5.0">
+                                        <Label text="Skill Name:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px;"/>
+                                        <Label fx:id="lblPreviewSkillName" text="—" style="-fx-text-fill: -teal; -fx-font-weight: bold; -fx-font-size: 12px;"/>
+                                    </HBox>
+                                    <HBox spacing="5.0">
+                                        <Label text="Offer Rate:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px;"/>
+                                        <Label fx:id="lblPreviewCreditRate" text="—" style="-fx-text-fill: -ink; -fx-font-weight: bold; -fx-font-size: 12px;"/>
+                                    </HBox>
+                                    <HBox spacing="5.0">
+                                        <Label text="Requested Hours:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px;"/>
+                                        <Label fx:id="lblPreviewNeededHours" text="—" style="-fx-text-fill: -ink; -fx-font-weight: bold; -fx-font-size: 12px;"/>
+                                    </HBox>
+                                    <HBox spacing="5.0">
+                                        <Label text="Credits:" style="-fx-text-fill: -ink-soft; -fx-font-size: 12px;"/>
+                                        <Label fx:id="lblPreviewCalculatedCredits" text="—" style="-fx-text-fill: -mustard; -fx-font-weight: bold; -fx-font-size: 12px;"/>
+                                    </HBox>
+                                </HBox>
+
+                                <HBox alignment="BOTTOM_RIGHT" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                                    <Button fx:id="btnMatch" text="Create Match" onAction="#handleMatch" styleClass="button-primary" style="-fx-padding: 8 20;"/>
+                                </HBox>
+                            </children>
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Reset View Button Row -->
+                    <HBox alignment="CENTER_LEFT" style="-fx-padding: 5 0 0 0;">
+                        <Button fx:id="btnResetView" text="Reset View" onAction="#handleResetView" styleClass="button-neutral" style="-fx-padding: 6 15;"/>
+                    </HBox>
+
+                    <!-- ROW 2: Tables GridPane -->
+                    <GridPane hgap="15.0" style="-fx-background-color: transparent;">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50.0" />
+                            <ColumnConstraints percentWidth="50.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints valignment="TOP" />
+                        </rowConstraints>
+                        <children>
+                            <!-- Left 60%: Service Exchanges -->
+                            <VBox spacing="8.0" style="-fx-background-color: -background;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Service Exchanges" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: -ink;"/>
+                                <TableView fx:id="tblExchanges" style="-fx-background-color: transparent;">
+                                    <columns>
+                                        <TableColumn fx:id="colExId" text="Service ID" prefWidth="75.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colExOfferId" text="Offer Post ID" prefWidth="90.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colExRequestId" text="Request Post ID" prefWidth="95.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colExCredits" text="Credits" prefWidth="65.0" styleClass="col-align-right"/>
+                                        <TableColumn fx:id="colExStatus" text="Status" prefWidth="80.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colExDate" text="Exchange Date" prefWidth="105.0" styleClass="col-align-center"/>
+                                    </columns>
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                    </columnResizePolicy>
+                                </TableView>
+                            </VBox>
+
+                            <!-- Right 40%: Credit Transactions -->
+                            <VBox spacing="8.0" style="-fx-background-color: -background;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Credit Transactions" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: -ink;"/>
+                                <TableView fx:id="tblTransactions" style="-fx-background-color: transparent;">
+                                    <columns>
+                                        <TableColumn fx:id="colTxId" text="Credit ID" prefWidth="75.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colTxMember" text="Member ID" prefWidth="90.0" styleClass="col-align-center"/>
+                                        <TableColumn fx:id="colTxMemberName" text="Member Name" prefWidth="100.0" styleClass="col-align-left"/>
+                                        <TableColumn fx:id="colTxChange" text="Credit Change" prefWidth="110.0" styleClass="col-align-right"/>
+                                        <TableColumn fx:id="colTxAmount" text="Credit Balance" prefWidth="95.0" styleClass="col-align-right"/>
+                                        <TableColumn fx:id="colTxDate" text="Transaction Date" prefWidth="105.0" styleClass="col-align-center"/>
+                                    </columns>
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                    </columnResizePolicy>
+                                </TableView>
+                            </VBox>
+                        </children>
+                    </GridPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <!-- ROW 3: Sticky Bottom Details Panel -->
+        <HBox spacing="20.0" minHeight="185.0" style="-fx-padding: 15; -fx-background-color: -surface; -fx-background-radius: 8px; -fx-border-color: -line; -fx-border-width: 1; -fx-margin-top: 15;" alignment="CENTER_LEFT">
+            <children>
+                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                    <!-- Exchange Details -->
+                    <VBox fx:id="vboxExchangeDetails" spacing="8.0">
+                        <Label text="Selected Exchange Details" style="-fx-text-fill: -teal; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <GridPane vgap="6.0" hgap="20.0">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="120.0" prefWidth="140.0"/>
+                                <ColumnConstraints minWidth="130.0" prefWidth="220.0"/>
+                                <ColumnConstraints minWidth="120.0" prefWidth="140.0"/>
+                                <ColumnConstraints minWidth="130.0" prefWidth="220.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- Row 1: Exchange ID, Skill Name -->
+                                <Label text="Exchange ID:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblExDetailId" text="None" style="-fx-text-fill: -ink; -fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Skill Name:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblExDetailSkillName" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                                <!-- Row 2: offer post: [Post Id, Member ID, Member Name] -->
+                                <Label text="Offer Post ID:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblExDetailOfferPostId" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Offer Member:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblExDetailOfferIdName" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                                <!-- Row 3: request post: [Post Id, Member ID, Member Name] -->
+                                <Label text="Request Post ID:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblExDetailRequestPostId" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Request Member:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblExDetailRequestIdName" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                                <!-- Row 4: Hours, Credits -->
+                                <Label text="Hours:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblExDetailHours" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                <Label text="Credits:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblExDetailCredits" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+                            </children>
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Transaction Details -->
+                    <VBox fx:id="vboxTransactionDetails" spacing="8.0" visible="false" managed="false">
+                        <Label text="Selected Transaction Details" style="-fx-text-fill: -teal; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <GridPane vgap="6.0" hgap="20.0">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="120.0" prefWidth="140.0"/>
+                                <ColumnConstraints minWidth="130.0" prefWidth="220.0"/>
+                                <ColumnConstraints minWidth="120.0" prefWidth="140.0"/>
+                                <ColumnConstraints minWidth="130.0" prefWidth="220.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                                <RowConstraints minHeight="22.0"/>
+                            </rowConstraints>
+                            <children>
+                                <!-- Row 1: Credit ID, Skill name -->
+                                <Label text="Credit ID:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblTxDetailId" text="None" style="-fx-text-fill: -ink; -fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Skill Name:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblTxDetailSkillName" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                                <!-- Row 2: Member ID, Member Name -->
+                                <Label text="Member ID:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblTxDetailMemberId" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Member Name:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblTxDetailMemberName" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                                <!-- Row 3: Credits, Credit Balance -->
+                                <Label text="Credits:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblTxDetailChange" text="None" style="-fx-font-weight: bold;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Credit Balance:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <Label fx:id="lblTxDetailAmount" text="None" style="-fx-text-fill: -ink; -fx-font-weight: bold;" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                                <!-- Row 4: Transaction Date -->
+                                <Label text="Transaction Date:" style="-fx-text-fill: -ink-soft;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <Label fx:id="lblTxDetailDate" text="None" style="-fx-text-fill: -ink;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                            </children>
+                        </GridPane>
+                    </VBox>
+                </VBox>
+
+                <!-- Right: Action buttons with Status Label on Top -->
+                <VBox fx:id="vboxActionsContainer" alignment="BOTTOM_RIGHT" minWidth="260.0" spacing="8.0" style="-fx-padding: 0 0 5 0;">
+                    <HBox spacing="5.0" alignment="BOTTOM_RIGHT" style="-fx-padding: 0 5 0 0;">
+                        <Label text="Status:" style="-fx-text-fill: -ink-soft; -fx-font-size: 13px;" />
+                        <Label fx:id="lblActionStatus" text="None" style="-fx-font-weight: bold; -fx-font-size: 13px;"/>
+                    </HBox>
+                    <HBox spacing="6.0" alignment="BOTTOM_RIGHT">
+                        <Button fx:id="btnAccept" text="Accept" onAction="#handleAcceptExchange" styleClass="button-secondary" style="-fx-padding: 10 15; -fx-min-width: 90px;"/>
+                        <Button fx:id="btnComplete" text="Complete" onAction="#handleCompleteExchange" styleClass="button-primary" style="-fx-padding: 10 15; -fx-min-width: 90px;"/>
+                        <Button fx:id="btnCancel" text="Cancel" onAction="#handleCancelExchange" styleClass="button-destructive" style="-fx-padding: 10 15; -fx-min-width: 90px;"/>
+                    </HBox>
+                </VBox>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,581 @@
+/* Dual-Theme Warm Cream & Moss Green Design System */
+.root {
+    /* DEFAULT: Dark Mode Palette */
+    -background: #1B2624;      /* deep blackened teal */
+    -surface: #223330;         /* dark mossy green-gray */
+    -surface-alt: #1F2C29;     /* slightly darker than surface */
+    -ink: #EDE8D8;             /* warm off-white */
+    -ink-soft: #A9A08A;        /* muted tan-gray */
+    -line: #33453F;            /* dark teal-gray */
+    -teal: #8CC0B3;            /* pale seafoam */
+    -teal-light: #6FA89C;      /* softer seafoam */
+    -mustard: #E3B25C;         /* brighter gold */
+    -brick: #E08A63;           /* soft coral-orange */
+    
+    /* Custom purple & yellow */
+    -purple: #C09FE6;
+    -yellow: #F3E086;
+    
+    /* Status colors */
+    -status-active: #4ADE80;
+    -status-matched: #60A5FA;
+    -status-closed: #94A3B8;
+    
+    /* Selection highlight (dimmed) */
+    -fx-selection-bar: rgba(140, 192, 179, 0.25);
+    -fx-selection-bar-non-focused: rgba(140, 192, 179, 0.15);
+    -fx-selection-bar-text: -ink;
+    -selected-row-bg: #22463C;
+    -selected-row-accent: #5DCAA5;
+    
+    /* Button text: dark mode background -> near-black text on accents */
+    -btn-text: #1B2624;
+    
+    -fx-font-family: "Segoe UI", -apple-system, Roboto, sans-serif;
+    -fx-background-color: -background;
+    -fx-text-fill: -ink;
+}
+
+/* Base Node Styles */
+.label {
+    -fx-text-fill: -ink;
+}
+
+/* Menu Bar Styling */
+.menu-bar {
+    -fx-background-color: -surface-alt;
+    -fx-border-color: -line;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: -ink;
+    -fx-font-size: 13px;
+}
+
+.menu:hover,
+.menu:showing {
+    -fx-background-color: -surface;
+}
+
+.menu-item {
+    -fx-background-color: -surface;
+}
+
+.menu-item .label {
+    -fx-text-fill: -ink;
+}
+
+.menu-item:focused {
+    -fx-background-color: -teal;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: -btn-text;
+}
+
+/* Tab Pane Styling */
+.tab-pane {
+    -fx-tab-min-height: 48px;
+    -fx-tab-max-height: 48px;
+    -fx-background-color: -background;
+}
+
+.tab-header-area {
+    -fx-padding: 0;
+    -fx-background-color: -background;
+}
+
+.tab-header-background {
+    -fx-background-color: -surface-alt;
+    -fx-border-color: -line;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 24 0 24;
+}
+
+.tab:hover {
+    -fx-background-color: -surface;
+}
+
+.tab:selected {
+    -fx-background-color: -background;
+    -fx-border-color: -brick;
+    -fx-border-width: 0 0 3 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: -ink-soft;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -brick;
+}
+
+.tab:focused {
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+}
+
+.tab:selected:focused {
+    -fx-background-color: -background !important;
+    -fx-background-insets: 0 !important;
+}
+
+.tab:focused .focus-indicator {
+    -fx-border-color: transparent !important;
+    -fx-border-style: none !important;
+    -fx-opacity: 0 !important;
+}
+
+/* Grid & Layout Containers */
+.dashboard-grid {
+    -fx-background-color: -background;
+    -fx-padding: 24;
+}
+
+/* Stats Cards */
+.card {
+    -fx-background-color: -surface;
+    -fx-border-color: -line;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+.card:hover {
+    -fx-border-color: -teal;
+}
+
+.card-title {
+    -fx-text-fill: -ink-soft;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-transform: uppercase;
+}
+
+.card-value {
+    -fx-text-fill: -teal;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 0 4 0;
+}
+
+.card-desc {
+    -fx-text-fill: -ink-soft;
+    -fx-font-size: 11px;
+}
+
+/* TableView Styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: -line;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -surface-alt;
+    -fx-background-radius: 12px 12px 0 0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-color: -line;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -ink;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* Dynamic Table Column Alignments */
+.col-align-left, .col-align-left .label {
+    -fx-alignment: CENTER-LEFT;
+}
+.col-align-center, .col-align-center .label {
+    -fx-alignment: CENTER;
+}
+.col-align-right, .col-align-right .label {
+    -fx-alignment: CENTER-RIGHT;
+}
+
+.table-row-cell {
+    -fx-background-color: -surface;
+    -fx-text-fill: -ink;
+    -fx-border-color: -line;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 44px;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -surface-alt;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: -line;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -teal;
+    -fx-text-fill: -btn-text;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: -btn-text;
+}
+
+.table-row-cell:selected:hover {
+    -fx-background-color: -teal-light;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-opacity: 0;
+}
+
+.table-row-cell:empty:hover {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-text-fill: transparent;
+}
+
+.table-row-cell .text {
+    -fx-fill: -ink;
+}
+
+.table-view .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+.table-view .placeholder .label {
+    -fx-text-fill: -ink-soft;
+}
+
+.table-view-no-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-padding: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+}
+
+/* ScrollBar Styling */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: -background;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: -line;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: -ink-soft;
+}
+
+/* Titles and Headers */
+.section-title {
+    -fx-text-fill: -teal;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 10 0;
+}
+
+/* ComboBox dropdown styling */
+.combo-box, .combo-box-base, .combo-box-popup .list-view, .combo-box-popup .list-view .list-cell {
+    -fx-text-fill: -ink;
+}
+.combo-box .label, .combo-box-base .label, .combo-box-popup .list-cell .label {
+    -fx-text-fill: -ink;
+}
+.combo-box-popup .list-cell {
+    -fx-background-color: -surface;
+    -fx-text-fill: -ink;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -surface-alt;
+    -fx-text-fill: -teal;
+}
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: -teal;
+    -fx-text-fill: -btn-text;
+}
+
+/* Forms & Splits */
+.split-pane {
+    -fx-background-color: -background;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: -line;
+}
+.split-pane > .vbox {
+    -fx-background-color: -background !important;
+}
+
+/* Inputs & Form Controls */
+.text-field {
+    -fx-background-color: -surface;
+    -fx-text-fill: -ink;
+    -fx-prompt-text-fill: -ink-soft;
+    -fx-border-color: -line;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+.text-field:focused {
+    -fx-border-color: -teal;
+}
+
+/* Theme Toggle Button styling */
+.toggle-button {
+    -fx-background-color: -surface-alt;
+    -fx-text-fill: -ink;
+    -fx-border-color: -line;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+.toggle-button:selected {
+    -fx-background-color: -teal;
+    -fx-text-fill: -btn-text;
+}
+
+/* Buttons System */
+/* Primary Brand Button (Create, Complete) */
+.button-primary {
+    -fx-background-color: -teal;
+    -fx-text-fill: -btn-text;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+.button-primary:hover {
+    -fx-opacity: 0.9;
+}
+
+/* Secondary Button (Save Changes) */
+.button-secondary {
+    -fx-background-color: -teal-light;
+    -fx-text-fill: -btn-text;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+.button-secondary:hover {
+    -fx-opacity: 0.9;
+}
+
+/* Destructive / Delete Button */
+.button-destructive {
+    -fx-background-color: -brick;
+    -fx-text-fill: -btn-text;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+.button-destructive:hover {
+    -fx-opacity: 0.9;
+}
+
+/* Regular Gray/Slate Button (Clear, Add New) */
+.button-neutral {
+    -fx-background-color: -surface-alt;
+    -fx-text-fill: -ink;
+    -fx-border-color: -line;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+.button-neutral:hover {
+    -fx-background-color: -surface;
+}
+
+/* Dark Theme Charts Styling */
+.chart {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+.chart-plot-background {
+    -fx-background-color: -background;
+}
+.chart-content {
+    -fx-background-color: transparent;
+}
+.axis {
+    -fx-tick-label-fill: -ink-soft;
+    -fx-tick-mark-stroke: -line;
+    -fx-axis-label-fill: -ink;
+}
+.axis-tick-mark {
+    -fx-stroke: -line;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: -line;
+}
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-text-fill: -ink;
+}
+.chart-legend-item {
+    -fx-text-fill: -ink;
+}
+
+/* Activity Line Chart Styling: teal = Offers, brick = Requests (dashed), mustard = Completed */
+.default-color0.chart-series-line {
+    -fx-stroke: -teal;
+    -fx-stroke-width: 3px;
+}
+.default-color0.chart-line-symbol {
+    -fx-background-color: -teal, white;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: -brick;
+    -fx-stroke-dash-array: 6 6;
+    -fx-stroke-width: 3px;
+}
+.default-color1.chart-line-symbol {
+    -fx-background-color: -brick, white;
+}
+
+.default-color2.chart-series-line {
+    -fx-stroke: -mustard;
+    -fx-stroke-width: 3px;
+}
+.default-color2.chart-line-symbol {
+    -fx-background-color: -mustard, white;
+}
+
+/* Category Pie Chart slices mapped to main colors (Tutoring = Teal, Repairs = Mustard, Household = Brick) */
+#pieChartCategories .default-color0.chart-pie {
+    -fx-pie-color: -teal;
+}
+#pieChartCategories .default-color1.chart-pie {
+    -fx-pie-color: -mustard;
+}
+#pieChartCategories .default-color2.chart-pie {
+    -fx-pie-color: -brick;
+}
+
+/* ComboBox height and text color alignment */
+.combo-box {
+    -fx-pref-height: 35px;
+    -fx-min-height: 35px;
+    -fx-max-height: 35px;
+    -fx-background-color: -surface;
+    -fx-text-fill: -ink;
+    -fx-border-color: -line;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.combo-box .label {
+    -fx-text-fill: -ink;
+    -fx-font-size: 13px;
+}
+
+.combo-box > .list-cell {
+    -fx-text-fill: -ink;
+}
+
+.combo-box > .list-cell:empty {
+    -fx-text-fill: -ink-soft;
+}
+
+.combo-box:empty > .list-cell {
+    -fx-text-fill: -ink-soft;
+}
+
+.combo-box:empty > .label {
+    -fx-text-fill: -ink-soft;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -surface;
+    -fx-border-color: -line;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: -ink;
+    -fx-background-color: -surface;
+    -fx-padding: 6 12;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -line;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -teal;
+    -fx-text-fill: -btn-text;
+}
+
+.table-row-cell:selected,
+.table-row-cell:filled:selected,
+.table-row-cell:selected:focused,
+.table-row-cell:filled:selected:focused {
+    -fx-background-color: -selected-row-bg;
+    -fx-border-color: transparent transparent transparent -selected-row-accent;
+    -fx-border-width: 0 0 0 3px;
+}
+
+.table-row-cell:selected .table-cell,
+.table-row-cell:selected .text,
+.table-row-cell:selected:focused .table-cell,
+.table-row-cell:selected:focused .text {
+    -fx-text-fill: -ink;
+    -fx-fill: -ink;
+}
+
+/* DatePicker Popup Header styling for light backgrounds */
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #F4F4F4 !important;
+}
+.date-picker-popup > .month-year-pane > .label,
+.date-picker-popup > .month-year-pane > .spinner > .label,
+.date-picker-popup > .month-year-pane .label {
+    -fx-text-fill: #000000 !important;
+}
+.date-picker-popup > .month-year-pane .button,
+.date-picker-popup > .month-year-pane .button:hover,
+.date-picker-popup > .month-year-pane .button:focused {
+    -fx-text-fill: #000000 !important;
+    -fx-background-color: transparent !important;
+}
+.date-picker-popup > .month-year-pane .left-arrow,
+.date-picker-popup > .month-year-pane .right-arrow,
+.date-picker-popup > .month-year-pane .arrow {
+    -fx-background-color: #000000 !important;
+}
+
+/* Pie Chart Labels and Connecting Lines in light/readable color */
+.chart-pie-label {
+    -fx-fill: -ink;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.chart-pie-label-line {
+    -fx-stroke: -ink-soft;
+    -fx-stroke-width: 1.5px;
+}
