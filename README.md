@@ -1,4 +1,4 @@
-# Project_23060486 <br>🤝 Community Skills Marketplace System
+# Community Skills Marketplace System
 
 A premium, state-of-the-art desktop application built in Scala 3 designed to facilitate mutual skill exchanges within a local community. Utilizing a virtual credit economy, members can publish skill offers, post requests for assistance, and book matches safely.
 
